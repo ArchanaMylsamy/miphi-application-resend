@@ -9,6 +9,7 @@ const multer = require('multer');
 const fs = require('fs');
 const crypto = require('crypto');
 const { Pool } = require('pg');
+const { Resend } = require('resend');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 const JWT_SECRET = process.env.JWT_SECRET_KEY
+const resend = new Resend(process.env.RESEND_API_KEY);
 // Initialize S3 client
 const s3Client = new S3Client({
     region: process.env.AWS_REGION, // e.g., 'us-east-1'
@@ -197,6 +199,36 @@ const initializeApp = async () => {
 };
  
 // Endpoints\
+//Resend endpoint 
+app.post('/api/send-email', async (req, res) => {
+  try {
+    const { to_name, from_name, from_email, query_type, from_mobile, message } = req.body;
+
+    const emailContent = `
+      Name: ${from_name}
+      Email: ${from_email}
+      Mobile: ${from_mobile}
+      Query Type: ${query_type}
+      Message: ${message}
+    `;
+
+    const data = await resend.emails.send({
+      from: 'Your Name <onrender@resend.dev>', // Use verified domain or default
+      to: ['your-business-email@example.com'], // Your business email to receive inquiries
+      reply_to: from_email, // User's email for replies
+      subject: `New ${query_type} from ${from_name}`,
+      text: emailContent,
+      // Optionally, use HTML for formatted emails
+      // html: `<p><strong>Name:</strong> ${from_name}</p><p><strong>Email:</strong> ${from_email}</p>...`,
+    });
+
+    res.status(200).json({ message: 'Email sent successfully', data });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
+});
+
 
 // Login Endpoint
 app.post('/login', async (req, res) => {
