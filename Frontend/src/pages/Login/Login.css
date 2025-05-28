@@ -1,0 +1,268 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  
+  
+  .login-container {
+    display: flex;
+    /* Use flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    width: 100vw;
+    /* Full width */
+    height: 100vh;
+    /* Full height */
+    background-color: #1A1E2C;
+    color: #A3A7C7;
+    overflow: hidden;
+  }
+  
+  form {
+    width: 100%;
+    /* Full width of its parent */
+    padding: 0 2rem;
+    /* Optional padding for smaller screens */
+  }
+  
+  .login-form-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    /* Set a max-width for better responsiveness */
+    width: 100%;
+    /* Allow full width until max-width */
+  }
+  
+  
+  
+  .login-img img {
+    width: 500px;
+  }
+  
+  
+  
+  .login-img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 100%;
+    /* Ensure image does not overflow */
+  }
+  
+  @media screen and (max-width: 900px) {
+    .login-img {
+      display: none;
+      /* Hide image on smaller screens */
+    }
+  
+    .login-container {
+      flex-direction: column;
+      /* Stack elements vertically */
+    }
+  
+    .login-form-container {
+      justify-content: center;
+      /* Center form on smaller screens */
+    }
+  }
+  
+  .login-avatar {
+    width: 100px;
+  }
+  
+  .login-welcome-text {
+    font-size: 2.9rem;
+    text-transform: uppercase;
+    margin: 15px 0;
+    color: #A3A7C7;
+  }
+  
+  .login-input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px;
+    border-bottom: 2px solid #A3A7C7;
+  }
+  
+  .login-input-div:after,
+  .login-input-div:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #7D73D3;
+    transition: .3s;
+  }
+  
+  .login-input-div:after {
+    right: 50%;
+  }
+  
+  .login-input-div:before {
+    left: 50%;
+  }
+  
+  .login-focus .login-icon i {
+    color: #38d39f;
+  }
+  
+  .login-focus div h5 {
+    top: -5px;
+    font-size: 15px;
+    color: #7D73D3;
+  }
+  
+  .login-focus:after,
+  .login-focus:before {
+    width: 50%;
+  }
+  
+  .login-one {
+    margin-top: 0;
+  }
+  
+  .login-two {
+    margin-bottom: 4px;
+  }
+  
+  .login-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-icon i {
+    color: #037971;
+    transition: .3s;
+  }
+  
+  .login-input-div>div {
+    position: relative;
+    height: 45px;
+  }
+  
+  .login-input-div>div h5 {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    /* Start from the middle */
+    transform: translateY(-50%);
+    /* Center vertically */
+    color: #A3A7C7;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    /* Apply transition to all properties */
+  }
+  
+  /* When input is focused, move the label up */
+  .login-focus>div h5 {
+    top: -5px;
+    /* Adjust this value to position the label above the input */
+    font-size: 15px;
+    /* Change font size if desired */
+    color: #7D73D3;
+    /* Change color if desired */
+  }
+  
+  
+  .login-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #555;
+  }
+  
+  .login-forgot-link {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: #7D73D3;
+    font-size: 0.9rem;
+    transition: .3s;
+  }
+  
+  .login-forgot-link:hover {
+    color: #A3A7C7;
+  }
+  
+  .login-btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #2c267d, #5a4dff, #645dce);
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    background-size: 200%;
+    transition: .5s;
+  }
+  
+  .login-btn:hover {
+    background-position: right;
+  }
+  
+  @media screen and (max-width: 1050px) {
+    .login-container {
+      grid-gap: 5rem;
+    }
+  }
+  
+  @media screen and (max-width: 1000px) {
+    form {
+      width: 290px;
+    }
+  
+    .login-welcome-text {
+      font-size: 2.4rem;
+      margin: 8px;
+    }
+  
+    .login-img img {
+      width: 400px;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    .login-img {
+      display: none;
+    }
+  
+    .login-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .login-wave {
+      display: none;
+    }
+  
+    .login-form-container {
+      justify-content: center;
+    }
+  }

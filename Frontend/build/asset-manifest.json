@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.384f9d4f.css",
+    "main.js": "/static/js/main.7ec4e450.js",
+    "static/js/453.773f7c02.chunk.js": "/static/js/453.773f7c02.chunk.js",
+    "static/media/miphi_app.webp": "/static/media/miphi_app.9d573262a81c1765e6e0.webp",
+    "index.html": "/index.html",
+    "main.384f9d4f.css.map": "/static/css/main.384f9d4f.css.map",
+    "main.7ec4e450.js.map": "/static/js/main.7ec4e450.js.map",
+    "453.773f7c02.chunk.js.map": "/static/js/453.773f7c02.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.384f9d4f.css",
+    "static/js/main.7ec4e450.js"
+  ]
+}
