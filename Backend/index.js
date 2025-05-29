@@ -295,7 +295,7 @@ app.post('/api/send-email', async (req, res) => {
     `;
 
     const data = await resend.emails.send({
-      from: 'inquire@miphi.in', // Use your verified domain
+      from: 'onrender@resend.dev', // Use your verified domain
       to: ['archanaa1404@gmail.com'], // Your business email
       reply_to: from_email, // User's email for replies
       subject: `New ${query_type} from ${from_name}`,
