@@ -198,13 +198,12 @@ const initializeApp = async () => {
   }
 };
  
-// Endpoints\
-//Resend endpoint 
 app.post('/api/send-email', async (req, res) => {
   try {
     const { to_name, from_name, from_email, query_type, from_mobile, message } = req.body;
 
-    const emailContent = `
+    // Plain text version (fallback)
+    const emailTextContent = `
       Name: ${from_name}
       Email: ${from_email}
       Mobile: ${from_mobile}
@@ -212,14 +211,96 @@ app.post('/api/send-email', async (req, res) => {
       Message: ${message}
     `;
 
+    // HTML template for the email
+    const emailHtmlContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New ${query_type} from ${from_name}</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+          }
+          .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          h2 {
+            color: #2c3e50;
+            text-align: center;
+          }
+          .field {
+            margin-bottom: 15px;
+          }
+          .field label {
+            font-weight: bold;
+            display: block;
+            color: #555;
+          }
+          .field p {
+            margin: 5px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+            word-wrap: break-word;
+          }
+          .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h2>New ${query_type} from ${from_name}</h2>
+          <div class="field">
+            <label>Name:</label>
+            <p>${from_name}</p>
+          </div>
+          <div class="field">
+            <label>Email:</label>
+            <p>${from_email}</p>
+          </div>
+          <div class="field">
+            <label>Mobile:</label>
+            <p>${from_mobile}</p>
+          </div>
+          <div class="field">
+            <label>Query Type:</label>
+            <p>${query_type}</p>
+          </div>
+          <div class="field">
+            <label>Message:</label>
+            <p>${message}</p>
+          </div>
+          <div class="footer">
+            <p>This email was sent from miphi.in. To reply, use the sender's email: ${from_email}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
     const data = await resend.emails.send({
-      from: 'onrender@resend.dev', // Use verified domain or default
-      to: ['archanaa1404@gmail.com'], // Your business email to receive inquiries
+      from: 'inquire@miphi.in', // Use your verified domain
+      to: ['archanaa1404@gmail.com'], // Your business email
       reply_to: from_email, // User's email for replies
       subject: `New ${query_type} from ${from_name}`,
-      text: emailContent,
-      // Optionally, use HTML for formatted emails
-      // html: `<p><strong>Name:</strong> ${from_name}</p><p><strong>Email:</strong> ${from_email}</p>...`,
+      text: emailTextContent, // Plain text fallback
+      html: emailHtmlContent, // HTML template
     });
 
     res.status(200).json({ message: 'Email sent successfully', data });
